@@ -14,15 +14,14 @@ public class QueenBoard{
      *final configuration of the board after adding 
      *all n queens.
      */
-    public boolean solve()
-    {
+    public boolean solve() {
 	return solveH(0);
     }
 
     /**
      *Helper method for solve. 
      */
-    private boolean solveH(int col){
+    private boolean solveH(int col) {
 	if (col == board.length) {
 	    return true;
 	}
@@ -53,7 +52,7 @@ public class QueenBoard{
 	return false;
     }
 
-    public void printSolution(){
+    public void printSolution() {
 	/**Print the board like toString, except
 	   all negative numbers, and 0's are replaced with '_'
 	   and all 1's are replaced with 'Q'
@@ -73,7 +72,7 @@ public class QueenBoard{
 	System.out.println(theBoard);
     }
 
-    private boolean addQueen(int row, int col){
+    private boolean addQueen(int row, int col) {
 	if (board[row][col] != 0) {
 	    return false;
 	}
@@ -117,7 +116,7 @@ public class QueenBoard{
 	return true;
     }
 
-    public String toString(){
+    public String toString() {
 	String ans = "";
 	for(int row = 0; row < board.length; row ++){
 	    for(int col = 0; col < board[0].length; col ++){
