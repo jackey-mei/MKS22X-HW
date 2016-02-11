@@ -35,7 +35,6 @@ public class QueenBoard{
 		}
 	    }
 	    if (addQueen(row, col)) {
-		printSolution();
 		return solveH(col + 1);
 	    }
 	    if (row == board.length - 1 && addQueen(row, col) == false) {
@@ -48,7 +47,6 @@ public class QueenBoard{
 			board[eachRow][col - 1] = -1;
 		    }
 		}
-		printSolution();
 		return solveH(col - 1);
 	    }
 	}
@@ -131,10 +129,9 @@ public class QueenBoard{
     }
     
     public static void main(String[] args) {
-	QueenBoard b = new QueenBoard(0);
+	QueenBoard b = new QueenBoard(5);
         b.solve();
 	System.out.println(b);
+	b.printSolution();
     }
-    
-    
 }
