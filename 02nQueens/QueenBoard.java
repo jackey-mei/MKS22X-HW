@@ -1,6 +1,5 @@
 public class QueenBoard{
-
-    private int[][]board;
+    private int[][] board;
     
     public QueenBoard(int size) {
 	board = new int[size][size];
@@ -24,13 +23,32 @@ public class QueenBoard{
      *Helper method for solve. 
      */
     private boolean solveH(int col){
+	if (col == board.length) {
+	    return true;
+	}
 	for (int row = 0; row < board.length; row ++) {
-	    if (board[row][col] == 0) {
-		addQueen(row, col);
+	    if (col == 0) {
+		for (int someRow = 0; someRow < board.length; someRow ++) {
+		    for (int someCol = 1; someCol < board.length; someCol ++) {
+			board[someRow][someCol] = 0;
+		    }
+		}
+	    }
+	    if (addQueen(row, col)) {
+		printSolution();
 		return solveH(col + 1);
 	    }
-	    if (board[row][col] != 0) {
-		removeQueen(row, col);
+	    if (row == board.length - 1 && addQueen(row, col) == false) {
+		if (col == 0) {
+		    return false;
+		}
+		for (int eachRow = 0; eachRow < board.length; eachRow ++) {
+		    if (board[eachRow][col - 1] == 1) {
+			removeQueen(eachRow, col - 1);
+			board[eachRow][col - 1] = -1;
+		    }
+		}
+		printSolution();
 		return solveH(col - 1);
 	    }
 	}
@@ -45,7 +63,7 @@ public class QueenBoard{
 	String theBoard = "";
 	for (int eachRow = 0; eachRow < board.length; eachRow ++) {
 	    for (int eachCol = 0; eachCol < board[eachRow].length; eachCol ++) {
-		if (board[eachRow][eachCol] == 0 || board.length == -1) {
+		if (board[eachRow][eachCol] == 0 || board[eachRow][eachCol] < 0) {
 		    theBoard += "_ ";
 		}
 		if (board[eachRow][eachCol] == 1) {
@@ -57,65 +75,65 @@ public class QueenBoard{
 	System.out.println(theBoard);
     }
 
-    /********Do Not Edit Below This Line**********************************/
-
     private boolean addQueen(int row, int col){
-	if(board[row][col] != 0){
+	if (board[row][col] != 0) {
 	    return false;
 	}
 	board[row][col] = 1;
 	int offset = 1;
-	while(col+offset < board[row].length){
-	    board[row][col+offset]--;
-	    if(row - offset >= 0){
-		board[row-offset][col+offset]--;
+	while (col + offset < board[row].length) {
+	    //right
+	    board[row][col + offset] --;
+	    //diagonally top right
+	    if (row - offset >= 0){
+		board[row - offset][col + offset] --;
 	    }
-	    if(row + offset < board.length){
-		board[row+offset][col+offset]--;
+	    //diagonally bottom right
+	    if (row + offset < board.length) {
+		board[row + offset][col + offset] --;
 	    }
-	    offset++;
+	    offset ++;
 	}
 	return true;
     }
 
-    private boolean removeQueen(int row, int col){
-	if(board[row][col] != 1){
+    private boolean removeQueen(int row, int col) {
+	if (board[row][col] != 1) {
 	    return false;
 	}
 	board[row][col] = 0;
 	int offset = 1;
-	while(col+offset < board[row].length){
-	    board[row][col+offset]++;
-	    if(row - offset >= 0){
-		board[row-offset][col+offset]++;
+	while (col + offset < board[row].length) {
+	    //right
+	    board[row][col + offset] ++;
+	    //diagonally top right
+	    if (row - offset >= 0){
+		board[row - offset][col + offset] ++;
 	    }
-	    if(row + offset < board.length){
-		board[row+offset][col+offset]++;
+	    //diagonally bottom right
+	    if (row + offset < board.length) {
+		board[row + offset][col + offset] ++;
 	    }
-	    offset++;
+	    offset ++;
 	}
 	return true;
     }
 
     public String toString(){
 	String ans = "";
-	for(int r = 0; r < board.length; r++){
-	    for(int c = 0; c < board[0].length; c++){
-		ans+= board[r][c]+"\t";
+	for(int row = 0; row < board.length; row ++){
+	    for(int col = 0; col < board[0].length; col ++){
+		ans += board[row][col] + "\t";
 	    }
-	    ans+="\n";
+	    ans += "\n";
 	}
 	return ans;
     }
     
-    public static void main(String[]args){
-	QueenBoard b = new QueenBoard(4);
-        System.out.println(b);
-	b.addQueen(3,0);
-	b.addQueen(0,1);
-        System.out.println(b);
-	b.removeQueen(3,0);
-        System.out.println(b);
+    public static void main(String[] args) {
+	QueenBoard b = new QueenBoard(0);
+        b.solve();
+	System.out.println(b);
     }
     
     
