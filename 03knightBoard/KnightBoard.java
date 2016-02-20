@@ -94,7 +94,7 @@ public class KnightBoard {
     }
 
     public static void main(String[] args) {
-	KnightBoard k = new KnightBoard(8);
+	KnightBoard k = new KnightBoard(5);
 	k.solve();
 	k.printSolution();
     }
