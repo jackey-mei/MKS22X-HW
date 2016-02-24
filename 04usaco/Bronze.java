@@ -49,8 +49,8 @@ public class Bronze {
     }
 
     public static void main(String[] args) {
-	File f = new File("makelake.in");
 	try {
+	    File f = new File("makelake.in");
 	    Scanner in = new Scanner(f);
 	    String firstLine = in.nextLine();
 	    String[] newFirst = firstLine.split(" ");
@@ -73,7 +73,7 @@ public class Bronze {
 	    for (int i = 0; i < numIns; i ++) {
 		stomp(land, instructions[i][0], instructions[i][1], instructions[i][2]);
 	    }
-	    System.out.println(calcFinalVol(land, numElev) + ", 7, Jackey, Mei");
+	    System.out.println(calcFinalVol(land, numElev) + ",7,Mei,Jackey");
 		
 		
 	}
