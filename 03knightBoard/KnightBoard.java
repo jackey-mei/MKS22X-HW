@@ -1,6 +1,6 @@
 public class KnightBoard {
     private int[][] board;
-    private int pos;;
+    private int pos;
 
     public KnightBoard(int size) {
 	board = new int[size][size];
