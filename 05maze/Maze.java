@@ -18,7 +18,43 @@ public class Maze {
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani) {
-        //COMPLETE CONSTRUCTOR
+        try {
+	    startx = -1;
+	    File f = new File(filename);
+	    Scanner in = new Scanner(f);
+	    int numOfLines = 0;
+	    int charPerLine = 0;
+	    while(in.hasNextLine()) {
+		numOfLines ++;
+		String currentLine = in.nextLine();
+		charPerLine = currentLine.length();
+	    }
+	    maze = new char[numOfLines][charPerLine];
+	    animate = ani;
+	    Scanner in2 = new Scanner(f);
+	    //System.out.println(numOfLines);
+	    //System.out.println(charPerLine);
+	    in.close();
+	    String mazeS = "";
+	    while (in2.hasNextLine()) {
+		mazeS += in2.nextLine();
+	    }
+	    for (int i = 0; i < numOfLines; i ++) {
+		for (int j = 0; j < charPerLine; j ++) {
+		    maze[i][j] = mazeS.charAt(((i * charPerLine) + j));
+		    if (maze[i][j] == 'S') {
+			startx = i;
+			starty = j;
+		    }
+		}
+	    }
+	    in2.close();
+	}
+	catch(FileNotFoundException e) {
+	    System.out.println("File was not found");
+	}
+	    
+		
     }
 
 
@@ -52,17 +88,41 @@ public class Maze {
         All visited spots that are part of the solution are changed to '@'
 
     */
-    private boolean solve(int x, int y){
+    private boolean solve(int row, int col){
         if (animate) {
             System.out.println(this);
-            wait(20);
+            wait(30);
         }
+	else {
+	    return false; //so it compiles
+	}
+	if (maze[row][col] == 'E') {
+	     return true;
+	}
 
-        //COMPLETE SOLVE
-
-        return false; //so it compiles
+	maze[row][col] = '@';
+	if (isMovable(row - 1, col) && solve(row - 1, col)) {
+	    return true;
+	}
+	if (isMovable(row, col + 1) && solve(row, col + 1)) {
+	    return true;
+	}
+	if (isMovable(row + 1, col) && solve(row + 1, col)) {
+	    return true;
+	}
+	if (isMovable(row, col - 1) && solve(row, col - 1)) {
+	    return true;
+	}
+	maze[row][col] = ' ';
+	return false;
     }
 
+    public boolean isMovable(int row, int col) {
+	if (maze[row][col] != '#' && maze[row][col] != '@') {
+	    return true;
+	}
+	return false;
+    }
 
 
     //FREE STUFF!!! *you should be aware of this*
@@ -76,6 +136,8 @@ public class Maze {
     public String toString() {
         int maxx = maze.length;
         int maxy = maze[0].length;
+	//System.out.println(maxx);
+	//System.out.println(maxy);
         String ans = "";
 
         if (animate) {
@@ -84,15 +146,15 @@ public class Maze {
 
         }
         for (int i = 0; i < maxx * maxy; i ++) {
-            if (i % maxx == 0 && i != 0){
-                ans += "\n";
+            if (i % maxy == 0 && i != 0){
+		ans += "\n";
             }
-            char c =  maze[i % maxx][i / maxx];
-            if (c == '#') {
-                ans += color(38, 47) + c;
+            char c = maze[i / maxy][i % maxy];
+            if (c == '#'){
+                ans += color(38,47) + c;
             }
 	    else {
-                ans += color(33, 40) + c;
+                ans += color(33,40) + c;
             }
         }
         return HIDE_CURSOR + go(0, 0) + ans + "\n" + SHOW_CURSOR + color(37, 40);
