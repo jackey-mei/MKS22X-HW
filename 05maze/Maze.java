@@ -93,9 +93,7 @@ public class Maze {
             System.out.println(this);
             wait(30);
         }
-	else {
-	    return false; //so it compiles
-	}
+	
 	if (maze[row][col] == 'E') {
 	     return true;
 	}
