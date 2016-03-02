@@ -84,7 +84,7 @@ public class Silver {
 	    //System.out.println(intLast[3]);
 	    //System.out.println(Integer.parseInt(newFirst[2]));
 	    //printArray(cowPasture);
-	    System.out.println(countTravel(cowPasture, intLast[0], intLast[1], intLast[2], intLast[3], Integer.parseInt(newFirst[2]), true) + ",7,Mei,Jackey");
+	    System.out.println(countTravel(cowPasture, intLast[0], intLast[1], intLast[2], intLast[3], Integer.parseInt(newFirst[2]), true) + ",Mei,Jackey,7");
 	}
 	catch(FileNotFoundException e) {
 	    System.out.println("File Not Found");
