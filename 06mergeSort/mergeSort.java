@@ -1,5 +1,11 @@
 import java.util.Arrays;
-public class mergeSort {
+public class Sorts {
+
+    public static void mergeSort(int[] arr, int startA, int endA, int startB, int endB) {
+	if (startA + 1 == startB) {
+return 
+
+
     public static int[] remove(int index, int[] arr) {
 	if (index >= arr.length || index < 0) {
 	    throw new IllegalArgumentException("index cannot be less than 0 or greater than the size");
