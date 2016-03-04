@@ -1,9 +1,29 @@
 import java.util.Arrays;
 public class Sorts {
 
-    public static void mergeSort(int[] arr, int startA, int endA, int startB, int endB) {
-	if (startA + 1 == startB) {
-return 
+    public static void mergeSort(int[] arr) {
+	int[] sortedArr = mergeSortH(arr);
+	for (int i = 0; i < arr.length; i ++) {
+	    arr[i] = sortedArr[i];
+	}
+    }
+
+    public static int[] mergeSortH(int[] arr) {
+	if (arr.length == 1) {
+	    return arr;
+	}
+	int middleIndex = arr.length / 2;
+	int[] firstHalf = new int[arr.length / 2];
+	int[] secondHalf = new int[arr.length - arr.length / 2];
+	for (int i = 0; i < arr.length / 2; i ++) {
+	    firstHalf[i] = arr[i];
+	}
+	for (int i = arr.length / 2; i < arr.length; i ++) {
+	    secondHalf[i - middleIndex] = arr[i];
+	}
+	return merge(mergeSortH(firstHalf), mergeSortH(secondHalf));
+    }
+	
 
 
     public static int[] remove(int index, int[] arr) {
@@ -55,9 +75,9 @@ return
     }
 
     public static void main(String[] args) {
-	int[] bob = {};
-	int[] jane = {};
-	System.out.println(Arrays.toString(merge(bob, jane)));
+	int[] bob = {41, 11, 0, 123, 55, 22, 1, 2, 3, 2};
+	mergeSort(bob);
+	System.out.println(Arrays.toString(bob));
     }
 }
 		    
