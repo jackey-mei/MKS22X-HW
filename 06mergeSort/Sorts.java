@@ -1,14 +1,18 @@
 import java.util.Arrays;
 public class Sorts {
+    
+    public static String name() {
+	return "7,Mei,Jackey";
+    }
 
-    public static void mergeSort(int[] arr) {
+    public static void mergesort(int[] arr) {
 	int[] sortedArr = mergeSortH(arr);
 	for (int i = 0; i < arr.length; i ++) {
 	    arr[i] = sortedArr[i];
 	}
     }
 
-    public static int[] mergeSortH(int[] arr) {
+    private static int[] mergeSortH(int[] arr) {
 	if (arr.length == 1) {
 	    return arr;
 	}
@@ -76,7 +80,7 @@ public class Sorts {
 
     public static void main(String[] args) {
 	int[] bob = {41, 11, 0, 123, 55, 22, 1, 2, 3, 2};
-	mergeSort(bob);
+	mergesort(bob);
 	System.out.println(Arrays.toString(bob));
     }
 }
