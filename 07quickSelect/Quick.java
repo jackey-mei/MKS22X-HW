@@ -1,5 +1,10 @@
 import java.util.*;
 public class Quick {
+
+    private static String name() {
+	return "7,Mei,Jackey";
+    }
+
     private static int partition(int[] data, int left, int right) {
 	//choose a random partition element at a location from left to right inclusive.
         //partition the array such that the randomly chosen element divides all values smaller and larger than it. 
@@ -38,5 +43,38 @@ public class Quick {
 	int tmp = data[x];
 	data[x] = data[y];
 	data[y] = tmp;
+    }
+
+    public static int quickselect(int[] data, int k) {
+	return quickselectH(data, k, 0, data.length - 1);
+    }
+
+    private static int quickselectH(int[] data, int k, int left, int right) {
+	if (left == right) {
+	    return data[left];
+	}
+	int index = partition(data, left, right);
+	if (index == k) {
+	    return data[k];
+	}
+	else if (index > k) {
+	    return quickselectH(data, k, left, index - 1);
+	}
+	else {
+	    return quickselectH(data, k, index + 1, right);
+	}
+    }
+
+    public static void main(String[] args) {
+	int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
+	//{-1, 0, 1, 3, 4, 11, 12, 22, 23, 30}
+	System.out.println(quickselect(examp, 0));
+	System.out.println(quickselect(examp, 1));
+	System.out.println(quickselect(examp, 2));
+	System.out.println(quickselect(examp, 3));
+	System.out.println(quickselect(examp, 4));
+	System.out.println(quickselect(examp, 5));
+	System.out.println(quickselect(examp, 6));
+	System.out.println(quickselect(examp, 7));
     }
 }
