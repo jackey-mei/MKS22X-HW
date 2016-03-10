@@ -46,6 +46,9 @@ public class Quick {
     }
 
     public static int quickselect(int[] data, int k) {
+	if (k >= data.length) {
+	    throw new IllegalArgumentException("k must be less than the length of the array");
+	}
 	return quickselectH(data, k, 0, data.length - 1);
     }
 
@@ -65,16 +68,25 @@ public class Quick {
 	}
     }
 
+    public static void quickSort(int[] data) {
+	quickSortH(data, 0, data.length - 1);
+    }
+	
+    private static void quickSortH(int[] data, int left, int right) {
+	if (left >= right) {
+	    return;
+	}
+	int divider = partition(data, left, right);
+	quickSortH(data, left, divider - 1);
+	quickSortH(data, divider + 1, right);
+    }
+	
+
     public static void main(String[] args) {
-	int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
+	//int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
 	//{-1, 0, 1, 3, 4, 11, 12, 22, 23, 30}
-	System.out.println(quickselect(examp, 0));
-	System.out.println(quickselect(examp, 1));
-	System.out.println(quickselect(examp, 2));
-	System.out.println(quickselect(examp, 3));
-	System.out.println(quickselect(examp, 4));
-	System.out.println(quickselect(examp, 5));
-	System.out.println(quickselect(examp, 6));
-	System.out.println(quickselect(examp, 7));
+	//System.out.println(quickselect(examp, 20));
+	//quickSort(examp);
+	//System.out.println(Arrays.toString(examp));
     }
 }
