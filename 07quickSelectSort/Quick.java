@@ -83,7 +83,10 @@ public class Quick {
 	
 
     public static void main(String[] args) {
-	//int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
+	int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
+	int[] examp2 = {0, 1, 2, 1, 2, 2, 1, 1, 2, 0};
+	System.out.println(partition(examp2, 0, 9));
+	System.out.println(Arrays.toString(examp2));
 	//{-1, 0, 1, 3, 4, 11, 12, 22, 23, 30}
 	//System.out.println(quickselect(examp, 20));
 	//quickSort(examp);
