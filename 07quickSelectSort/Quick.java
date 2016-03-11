@@ -47,7 +47,7 @@ public class Quick {
         //return the index of the partition element. 
         //this allows your quickselect method to decide where to go next.
 	
-	int randSel = left + new Random().nextInt(right - left + 1);
+	int randSel = data[left + new Random().nextInt(right - left + 1)];
 	//System.out.println(randSel);
 	int[] newData = new int[right - left + 1];
 	int[] bounds = new int[2];
@@ -126,6 +126,7 @@ public class Quick {
 	}
 	int[] bounds = partition(data, left, right);
 	//System.out.println(Arrays.toString(data));
+	//System.out.println(Arrays.toString(bounds));
 	int leftDivider = bounds[0];
 	int rightDivider = bounds[1];
 	quickSortH(data, left, leftDivider);
@@ -139,7 +140,7 @@ public class Quick {
 	System.out.println(Arrays.toString(examp2));
 	//{-1, 0, 1, 3, 4, 11, 12, 22, 23, 30}
 	//System.out.println(quickselect(examp, 20));
-	//quickSort(examp);
-	//System.out.println(Arrays.toString(examp));
+	quickSort(examp);
+	System.out.println(Arrays.toString(examp));
     }
 }
