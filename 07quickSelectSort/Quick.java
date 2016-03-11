@@ -134,13 +134,15 @@ public class Quick {
     }
 
     public static void main(String[] args) {
-	int[] examp = {0, -1, 22, 1, 23, 30, 3, 11, 12, 4};
-	int[] examp2 = {0, 0, 2, 1, 2, 0, 1, 1, 2};
-	quickSort(examp2);
-	System.out.println(Arrays.toString(examp2));
-	//{-1, 0, 1, 3, 4, 11, 12, 22, 23, 30}
-	//System.out.println(quickselect(examp, 20));
-	quickSort(examp);
-	System.out.println(Arrays.toString(examp));
+	int[] d = new int [4000000];
+	int[] c = new int [d.length];
+
+	for (int i = 0; i < d.length; i ++) {
+	    d[i] = (int)(Math.random()*3);
+	    c[i] = d[i];
+	}
+	quickSortOld(d); //or even your old quicksort!!!
+	//Arrays.sort(d);
+	//quickSort(d);
     }
 }
