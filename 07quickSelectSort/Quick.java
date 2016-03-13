@@ -134,15 +134,16 @@ public class Quick {
     }
 
     public static void main(String[] args) {
-	int[] d = new int [4000000];
-	int[] c = new int [d.length];
-
-	for (int i = 0; i < d.length; i ++) {
-	    d[i] = (int)(Math.random()*3);
-	    c[i] = d[i];
+	int[] c = new int[4000000];
+	//int[] d = new int [c.length];
+	Random rand = new Random();
+	for (int i = 0; i < c.length; i ++) {
+	    c[i] = (int)(Math.random() * 3);
+	    //d[i] = c[i];
+	    //c[i] = rand.nextInt();
 	}
-	quickSortOld(d); //or even your old quicksort!!!
-	//Arrays.sort(d);
-	//quickSort(d);
+	quickSortOld(c);
+	//Arrays.sort(c);
+	//quickSort(c);
     }
 }
