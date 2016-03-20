@@ -1,15 +1,18 @@
 public class MyLinkedList {
 
     private LNode start;
+    private LNode end;
     private int size;
 
     public MyLinkedList() {
 	start = null;
+	end = null;
 	size = 0;
     }
 
     public MyLinkedList(LNode newStart) {
 	start = newStart;
+	end = newStart;
 	size = 1;
     }
 
@@ -55,20 +58,16 @@ public class MyLinkedList {
 
     public boolean add(int value) {
 	LNode temp = new LNode(value);
-	LNode current = start;
-	// sets empty start to new node
-	if (current == null) {
+	if (start == null && end == null) {
 	    start = temp;
+	    end = temp;
 	    size ++;
-	    return true;
 	}
-	// from the start LNode, go to the end of the list
-	while (current.getNext() != null) {
-	    current = current.getNext();
+	else {
+	    end.setNext(temp);
+	    end = temp;
+	    size ++;
 	}
-	// last node becomes the new node
-	current.setNext(temp);
-	size ++;
 	return true;
     }
 
@@ -81,6 +80,7 @@ public class MyLinkedList {
 	// sets empty start to new node
 	if (current == null) {
 	    start = temp;
+	    end = temp;
 	    size ++;
 	    return true;
 	}
@@ -94,6 +94,10 @@ public class MyLinkedList {
 	// accounts for cases where index is not 0
 	// new node sets next to node at index if that node exists
 	// node at index - 1 sets next to new node
+	if (index == size) {
+	    add(value);
+	    return true;
+	}
 	for (int i = index; i > 1; i --) {
 	    current = current.getNext();
 	}
@@ -177,15 +181,18 @@ public class MyLinkedList {
     public static void main(String[] args) {
 	MyLinkedList myLL = new MyLinkedList();
 	myLL.add(3);
+	System.out.println(myLL);
 	myLL.add(5);
+	System.out.println(myLL);
 	myLL.add(7);
+	System.out.println(myLL);
 	myLL.set(1, 50);
 	myLL.set(2, 25);
 	System.out.println(myLL);
 	myLL.add(3, 100);
-	//System.out.println(myLL.remove(0));
-	//myLL.remove(0);
-	//System.out.println(myLL);
+	System.out.println(myLL);
+	myLL.remove(0);
+	System.out.println(myLL);
 	
     }
 }
