@@ -57,8 +57,8 @@ public class MyLinkedList<T> {
 	return removed.getValue();
     }
 
-    public boolean add(int value) {
-	LNode temp = new LNode(value);
+    public boolean add(T someThing) {
+	LNode temp = new LNode(someThing);
 	if (start == null && end == null) {
 	    start = temp;
 	    end = temp;
@@ -72,8 +72,8 @@ public class MyLinkedList<T> {
 	return true;
     }
 
-    public boolean add(int index, int value) {
-	LNode temp = new LNode(value);
+    public boolean add(int index, T someThing) {
+	LNode temp = new LNode(someThing);
 	LNode current = start;
 	if (index > size || index < 0) {
 	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
@@ -96,7 +96,7 @@ public class MyLinkedList<T> {
 	// new node sets next to node at index if that node exists
 	// node at index - 1 sets next to new node
 	if (index == size) {
-	    add(value);
+	    add(someThing);
 	    return true;
 	}
 	for (int i = index; i > 1; i --) {
@@ -126,7 +126,7 @@ public class MyLinkedList<T> {
 	return list;    
     }
 
-    public int get(int index) {
+    public T get(int index) {
 	if (index >= size || index < 0) {
 	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
 	}
@@ -137,7 +137,7 @@ public class MyLinkedList<T> {
 	return current.getValue();
     }
 
-    public void set(int index, int newValue) {
+    public void set(int index, T newThing) {
 	if (index >= size || index < 0) {
 	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
 	}
@@ -145,29 +145,29 @@ public class MyLinkedList<T> {
 	for (int i = index; i > 0; i --) {
 	    current = current.getNext();
 	}
-	current.setValue(newValue);
+	current.setValue(newThing);
     }
 	
     public class LNode {
-	private int value;
+	private T thing;
 	private LNode next;
 
-	public LNode(int dataValue) {
-	    value = dataValue;
+	public LNode(T thingValue) {
+	    thing = thingValue;
 	    next = null;
 	}
 
-	public LNode(int dataValue, LNode next) {
-	    value = dataValue;
+	public LNode(T thingValue, LNode next) {
+	    thing = thingValue;
 	    this.next = next;
 	}
 
-	public int getValue() {
-	    return value;
+	public T getValue() {
+	    return thing;
 	}
 
-	public void setValue(int value) {
-	    this.value = value;
+	public void setValue(T thingValue) {
+	    thing = thingValue;
 	}
 
 	public LNode getNext() {
@@ -180,19 +180,19 @@ public class MyLinkedList<T> {
     }
 
     public static void main(String[] args) {
-	MyLinkedList myLL = new MyLinkedList();
-	myLL.add(3);
+	MyLinkedList<String> myLL = new MyLinkedList<String>();
+	myLL.add("n0thing");
 	System.out.println(myLL);
-	myLL.add(5);
+	myLL.add("shroud");
 	System.out.println(myLL);
-	myLL.add(7);
+	myLL.add("seangares");
 	System.out.println(myLL);
-	myLL.set(1, 50);
-	myLL.set(2, 25);
+	myLL.set(1, "freakazoid");
+	myLL.set(2, "stewie2k");
 	System.out.println(myLL);
-	myLL.add(3, 100);
+	myLL.add(3, "hiko");
 	System.out.println(myLL);
-	myLL.remove(0);
+	myLL.remove(3);
 	System.out.println(myLL);
 	
     }
