@@ -1,8 +1,9 @@
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
     private LNode start;
     private LNode end;
     private int size;
+    private T thing;
 
     public MyLinkedList() {
 	start = null;
@@ -20,11 +21,11 @@ public class MyLinkedList {
 	return size;
     }
 
-    public int indexOf(int value) {
+    public int indexOf(T someThing) {
 	LNode current = start;
 	int index = 0;
 	while (current.getNext() != null) {
-	    if (current.getValue() == value) {
+	    if (current.getValue().equals(someThing)) {
 		return index;
 	    }
 	    index ++;
@@ -33,7 +34,7 @@ public class MyLinkedList {
 	return -1;
     }
 
-    public int remove(int index) {
+    public T remove(int index) {
 	if (index >= size || index < 0) {
 	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
 	}
