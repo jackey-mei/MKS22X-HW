@@ -36,7 +36,7 @@ public class MyLinkedList<T> {
 
     public T remove(int index) {
 	if (index >= size || index < 0) {
-	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
+	    throw new IndexOutOfBoundsException("index cannot be equal to or greater than size or less than 0");
 	}
 	LNode current = start;
 	LNode removed;
@@ -44,6 +44,10 @@ public class MyLinkedList<T> {
 	if (index == 0) {
 	    removed = start;
 	    start = current.getNext();
+	    // sets end to null when removing only one item
+	    if (removed.getNext() == null) {
+		end = null;
+	    }
 	}
 	// removes element at index and redirects
 	else {
@@ -52,6 +56,10 @@ public class MyLinkedList<T> {
 	    }
 	    removed = current.getNext();
 	    current.setNext(removed.getNext());
+	    // sets the end to second to last node when removing last node
+	    if (removed.getNext() == null) {
+		end = current;
+	    }
 	}
 	size --;
 	return removed.getValue();
@@ -76,7 +84,7 @@ public class MyLinkedList<T> {
 	LNode temp = new LNode(someThing);
 	LNode current = start;
 	if (index > size || index < 0) {
-	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
+	    throw new IndexOutOfBoundsException("index cannot be equal to or greater than size or less than 0");
 	}
 	// sets empty start to new node
 	if (current == null) {
@@ -128,7 +136,7 @@ public class MyLinkedList<T> {
 
     public T get(int index) {
 	if (index >= size || index < 0) {
-	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
+	    throw new IndexOutOfBoundsException("index cannot be equal to or greater than size or less than 0");
 	}
 	LNode current = start;
 	for (int i = index; i > 0; i --) {
@@ -139,7 +147,7 @@ public class MyLinkedList<T> {
 
     public void set(int index, T newThing) {
 	if (index >= size || index < 0) {
-	    throw new IllegalArgumentException("index cannot be equal to or greater than size or less than 0");
+	    throw new IndexOutOfBoundsException("index cannot be equal to or greater than size or less than 0");
 	}
 	LNode current = start;
 	for (int i = index; i > 0; i --) {
@@ -192,9 +200,10 @@ public class MyLinkedList<T> {
 	System.out.println(myLL);
 	myLL.add(3, "hiko");
 	System.out.println(myLL);
-	myLL.remove(3);
+	myLL.remove(0);
 	System.out.println(myLL);
-	
+	myLL.add(0, "skadoodle");
+	System.out.println(myLL);
     }
 }
 
