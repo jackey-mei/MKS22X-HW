@@ -11,14 +11,23 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public class LLIterator implements Iterator<T> {
-	LNode current = start;
+	private LNode next;
+
+	public LLIterator() {
+	    next = start;
+	}
 
 	public boolean hasNext() {
-	    return current.getNext() != null;
+	    return next != null;
 	}
 
 	public T next() {
-	    return current.getNext().getValue();
+	    if (! hasNext()) {
+		throw new NoSuchElementException();
+	    }
+	    T value = next.getValue();
+	    next = next.getNext();
+	    return value;
 	}
 
 	public void remove() {
@@ -225,6 +234,10 @@ public class MyLinkedList<T> implements Iterable<T> {
 	System.out.println(myLL);
 	myLL.add(0, "skadoodle");
 	System.out.println(myLL);
+
+	for (String s : myLL) {
+	    System.out.print(s + " ");
+	}
     }
 }
 
