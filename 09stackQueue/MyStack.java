@@ -20,7 +20,7 @@ public class MyStack<T> extends MyLinkedList<T> {
      */
     public T pop() {
 	if (LL.size() > 0) {
-	    LL.remove(LL.size() - 1);
+	    return LL.remove(LL.size() - 1);
 	}
 	throw new NoSuchElementException();
     }

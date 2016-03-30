@@ -1,36 +1,46 @@
-public class ParenDemo {
+public class ParenDemo<T> extends MyStack<T> {
 
-    public static boolean isMatching(String s) {
-	String opening = "";
-	String closing = "";
-	for (int i = 0; i < s.length(); i ++) {
-	    if (s.substring(i, i + 1).equals("[") || s.substring(i, i + 1).equals("(") || s.substring(i, i + 1).equals("{")) {
-		opening += s.substring(i, i + 1);
+    public static boolean isMatching(String someString) {
+	String s = someString;
+        MyStack<Character> someStack = new MyStack<Character>();
+	while (s.length() > 0) {
+	    if (s.charAt(0) == '(' || s.charAt(0) == '{' || s.charAt(0) == '[') {
+		someStack.push(s.charAt(0));
+		s = s.substring(1, s.length());
+		//System.out.println("Here");
 	    }
-	    else if (s.substring(i, i + 1).equals("]") || s.substring(i, i + 1).equals(")") || s.substring(i, i + 1).equals("}")) {
-		closing += s.substring(i, i + 1);
-	    }
-	}
-	System.out.println(opening);
-	System.out.println(closing);
-	if (opening.length() == closing.length()) {
-	    while (opening.length() > 0) {
-		if (opening.charAt(opening.length() - 1) == closing.charAt(0)) {
-		    opening = opening.substring(0, opening.length() - 1);
-		    closing = closing.substring(1, closing.length());
+	    else if (s.charAt(0) == ')' || s.charAt(0) == '}' || s.charAt(0) == ']') {
+		if (someStack.size() > 0) {
+		    if (someStack.peek() == '(' && s.charAt(0) == ')' || someStack.peek() == '{' && s.charAt(0) == '}' || someStack.peek() == '[' && s.charAt(0) == ']') {
+			someStack.pop();
+			s = s.substring(1, s.length());
+		    }
+		    else {
+			//System.out.println("Here!");
+			return false;
+		    }
 		}
 		else {
+		    //System.out.println("Here!!");
 		    return false;
 		}
 	    }
-	    return true;
+	    //System.out.println(someStack.size());
 	}
-	return false;
+	//System.out.println("Here!!!");
+	return someStack.isEmpty();
     }
 
     public static void main(String[] args) {
 	String input = "()()(([[]]))";
-	System.out.println(isMatching(input));
+	if (args.length > 0) {
+	    input = args[0];
+	    System.out.println(isMatching(input)); 
+	}
+	else {
+	    System.out.println("Usage:"); 
+	    System.out.println("java ParenDemo \"text\""); 
+	}
     }
 }
    

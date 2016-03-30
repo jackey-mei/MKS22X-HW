@@ -239,6 +239,10 @@ public class MyLinkedList<T> implements Iterable<T> {
 	System.out.println(myLL);
 	myLL.remove(3);
 	System.out.println(myLL);
+	MyLinkedList<Character> myLL2 = new MyLinkedList<Character>();
+	myLL2.add('(');
+	myLL2.add(')');
+	System.out.println(myLL2);
     }
 }
 
