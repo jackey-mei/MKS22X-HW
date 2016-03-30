@@ -49,4 +49,21 @@ public class MyQueue<T> extends MyLinkedList<T> {
     public boolean isEmpty() {
 	return LL.size() == 0;
     }
+
+    public static void main(String[] args) {
+	MyQueue<String> newQ = new MyQueue<String>();
+	newQ.enqueue("hiko");
+	newQ.enqueue("adren");
+	newQ.enqueue("nitr0");
+	newQ.enqueue("elige");
+	newQ.enqueue("s1mple");
+	System.out.println(newQ.size());
+	System.out.println(newQ);
+	System.out.println(newQ.dequeue());
+	System.out.println(newQ.dequeue());
+	System.out.println(newQ.peek());
+	newQ.enqueue("koosta");
+	System.out.println(newQ);
+    }
+
 }
