@@ -4,12 +4,12 @@ public class ParenDemo<T> extends MyStack<T> {
 	String s = someString;
         MyStack<Character> someStack = new MyStack<Character>();
 	while (s.length() > 0) {
-	    if (s.charAt(0) == '(' || s.charAt(0) == '{' || s.charAt(0) == '[') {
+	    if (s.charAt(0) == '(' || s.charAt(0) == '{' || s.charAt(0) == '[' || s.charAt(0) == '<') {
 		someStack.push(s.charAt(0));
 		s = s.substring(1, s.length());
 		//System.out.println("Here");
 	    }
-	    else if (s.charAt(0) == ')' || s.charAt(0) == '}' || s.charAt(0) == ']') {
+	    else if (s.charAt(0) == ')' || s.charAt(0) == '}' || s.charAt(0) == ']' || s.charAt(0) == '>') {
 		if (someStack.size() > 0) {
 		    if (someStack.peek() == '(' && s.charAt(0) == ')' || someStack.peek() == '{' && s.charAt(0) == '}' || someStack.peek() == '[' && s.charAt(0) == ']') {
 			someStack.pop();
