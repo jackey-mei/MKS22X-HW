@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyStack<T> extends MyLinkedList<T> {
+public class MyStack<T> {
 
     private MyLinkedList<T> LL;
 
@@ -48,5 +48,19 @@ public class MyStack<T> extends MyLinkedList<T> {
      */
     public boolean isEmpty() {
 	return LL.size() == 0;
+    }
+
+    public String toString() {
+	return LL.toString();
+    }
+
+    public static void main(String[] args) {
+	MyStack<String> newS = new MyStack<String>();
+	newS.push("hiko");
+	newS.push("n0thing");
+	newS.push("dazed");
+	System.out.println(newS);
+	newS.pop();
+	System.out.println(newS);
     }
 }

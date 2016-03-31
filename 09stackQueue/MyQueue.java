@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyQueue<T> extends MyLinkedList<T> {
+public class MyQueue<T> {
 
     private MyLinkedList<T> LL;
 
@@ -48,6 +48,10 @@ public class MyQueue<T> extends MyLinkedList<T> {
      */
     public boolean isEmpty() {
 	return LL.size() == 0;
+    }
+
+    public String toString() {
+	return LL.toString();
     }
 
     public static void main(String[] args) {
