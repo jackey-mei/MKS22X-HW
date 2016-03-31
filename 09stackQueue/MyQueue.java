@@ -57,7 +57,7 @@ public class MyQueue<T> extends MyLinkedList<T> {
 	newQ.enqueue("nitr0");
 	newQ.enqueue("elige");
 	newQ.enqueue("s1mple");
-	System.out.println(newQ.size());
+	//System.out.println(newQ.size());
 	System.out.println(newQ);
 	System.out.println(newQ.dequeue());
 	System.out.println(newQ.dequeue());

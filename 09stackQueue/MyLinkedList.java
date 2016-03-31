@@ -148,15 +148,15 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     public String toString() {
 	String list = "[";
-	int currSize = size;
+	int currSize = size();
 	LNode current = start;
 	if (currSize > 0) {
-	    list += String.valueOf(current.getValue());
+	    list += current.getValue();
 	    current = current.getNext();
 	    currSize --;
 	}
 	while (currSize > 0) {
-	    list += ", " + String.valueOf(current.getValue());
+	    list += ", " + current.getValue();
 	    current = current.getNext();
 	    currSize --;
 	}
