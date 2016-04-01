@@ -104,6 +104,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 	}
 	else {
 	    end.setNext(temp);
+	    temp.setPrev(end);
 	    end = temp;
 	    size ++;
 	}
@@ -113,6 +114,7 @@ public class MyLinkedList<T> implements Iterable<T> {
     public boolean add(int index, T someThing) {
 	LNode temp = new LNode(someThing);
 	LNode current = start;
+	LNode current2 = end;
 	if (index > size || index < 0) {
 	    throw new IndexOutOfBoundsException("index cannot be equal to or greater than size or less than 0");
 	}
@@ -126,6 +128,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 	// adds new node at index 0
 	if (index == 0) {
 	    temp.setNext(current);
+	    current.setPrev(temp);
 	    start = temp;
 	    size ++;
 	    return true;
@@ -137,18 +140,27 @@ public class MyLinkedList<T> implements Iterable<T> {
 	    add(someThing);
 	    return true;
 	}
-	for (int i = index; i > 1; i --) {
-	    current = current.getNext();
+	if (index <= size / 2) {
+	    for (int i = index; i > 1; i --) {
+		current = current.getNext();
+	    }
+	    temp.setNext(current.getNext());
+	    current.getNext.setPrev(temp);
+	    current.setNext(temp);
+	    temp.setPrev(current);
+	    size ++;
 	}
-	temp.setNext(current.getNext());
-	current.setNext(temp);
-	size ++;
+	else {
+	    for (int i = index; i > size; i ++) {
+
+	    }
+	}
 	return true;
     }
 
     public String toString() {
 	String list = "[";
-	int currSize = size();
+	int currSize = size;
 	LNode current = start;
 	if (currSize > 0) {
 	    list += current.getValue();
