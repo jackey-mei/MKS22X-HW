@@ -192,10 +192,12 @@ public class MyLinkedList<T> implements Iterable<T> {
     public class LNode {
 	private T thing;
 	private LNode next;
+	private LNode prev;
 
 	public LNode(T thingValue) {
 	    thing = thingValue;
 	    next = null;
+	    prev = null;
 	}
 
 	public LNode(T thingValue, LNode next) {
@@ -207,6 +209,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 	    return thing;
 	}
 
+
 	public void setValue(T thingValue) {
 	    thing = thingValue;
 	}
@@ -215,8 +218,16 @@ public class MyLinkedList<T> implements Iterable<T> {
 	    return next;
 	}
 
+	public LNode getPrev() {
+	    return prev;
+	}
+
 	public void setNext(LNode newNext) {
 	    next = newNext;
+	}
+
+	public void setPrev(LNode newPrev) {
+	    prev = newPrev;
 	}
     }
 
