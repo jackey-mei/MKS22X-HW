@@ -74,6 +74,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 	if (index == 0) {
 	    removed = start;
 	    start = current.getNext();
+	    start.setPrev(null);
 	    // sets end to null when removing only one item
 	    if (removed.getNext() == null) {
 		end = null;
@@ -89,6 +90,9 @@ public class MyLinkedList<T> implements Iterable<T> {
 	    // sets the end to second to last node when removing last node
 	    if (removed.getNext() == null) {
 		end = current;
+	    }
+	    else {
+		current.getNext().getNext().setPrev(current);
 	    }
 	}
 	size --;
@@ -145,15 +149,20 @@ public class MyLinkedList<T> implements Iterable<T> {
 		current = current.getNext();
 	    }
 	    temp.setNext(current.getNext());
-	    current.getNext.setPrev(temp);
+	    current.getNext().setPrev(temp);
 	    current.setNext(temp);
 	    temp.setPrev(current);
 	    size ++;
 	}
 	else {
 	    for (int i = index; i > size; i ++) {
-
+		current2 = current2.getPrev();
 	    }
+	    temp.setNext(current2.getNext());
+	    current2.getNext().setPrev(temp);
+	    current2.setNext(temp);
+	    temp.setPrev(current2);
+	    size ++;
 	}
 	return true;
     }
@@ -266,6 +275,18 @@ public class MyLinkedList<T> implements Iterable<T> {
 	myLL2.add('(');
 	myLL2.add(')');
 	System.out.println(myLL2);
+	System.out.println();
+
+	Iterator<String> itr = myLL.iterator();
+	while (itr.hasNext()) {
+	    String s = itr.next();
+	    System.out.println(s);
+	}
+	System.out.println();
+
+	for (String t: myLL) {
+	    System.out.println(t);
+	}
     }
 }
 
