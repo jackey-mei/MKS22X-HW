@@ -144,26 +144,14 @@ public class MyLinkedList<T> implements Iterable<T> {
 	    add(someThing);
 	    return true;
 	}
-	if (index <= size / 2) {
-	    for (int i = index; i > 1; i --) {
-		current = current.getNext();
-	    }
-	    temp.setNext(current.getNext());
-	    current.getNext().setPrev(temp);
-	    current.setNext(temp);
-	    temp.setPrev(current);
-	    size ++;
+	for (int i = index; i > 1; i --) {
+	    current = current.getNext();
 	}
-	else {
-	    for (int i = index; i > size; i ++) {
-		current2 = current2.getPrev();
-	    }
-	    temp.setNext(current2.getNext());
-	    current2.getNext().setPrev(temp);
-	    current2.setNext(temp);
-	    temp.setPrev(current2);
-	    size ++;
-	}
+	temp.setNext(current.getNext());
+	current.getNext().setPrev(temp);
+	current.setNext(temp);
+	temp.setPrev(current);
+	size ++;
 	return true;
     }
 
@@ -270,6 +258,8 @@ public class MyLinkedList<T> implements Iterable<T> {
 	myLL.add(0, "skadoodle");
 	System.out.println(myLL);
 	myLL.remove(3);
+	System.out.println(myLL);
+	myLL.add(1, "semphis");
 	System.out.println(myLL);
 	MyLinkedList<Character> myLL2 = new MyLinkedList<Character>();
 	myLL2.add('(');
