@@ -94,7 +94,7 @@ public class MyDeque<T> {
 	    }
 	}
 	else if (size == 0) {
-	    throw new NullPointerException("Nothing is in the array");
+	    throw new NoSuchElementException("Nothing is in the queue");
 	}
 	else {
 	    size --;
@@ -116,7 +116,7 @@ public class MyDeque<T> {
 	    }
 	}
 	else if (size == 0) {
-	    throw new NullPointerException("Nothing is in the array");
+	    throw new NoSuchElementException("Nothing is in the queue");
 	}
 	else {
 	    size --;
@@ -125,15 +125,25 @@ public class MyDeque<T> {
     }
 
     public T getFirst() {
-	return data[start];
+	if (! isEmpty()) {
+	    return data[start];
+	}
+	throw new NoSuchElementException("Nothing is in the queue");
     }
 
     public T getLast() {
-	return data[end];
+	if (! isEmpty()) {
+	    return data[end];
+	}
+	throw new NoSuchElementException("Nothing is in the queue");
     }
 
     public int size() {
 	return size;
+    }
+
+    public boolean isEmpty() {
+	return size == 0;
     }
 
     public String toString() {
@@ -196,6 +206,12 @@ public class MyDeque<T> {
 
 	newD3.removeFirst();
 	System.out.println(newD3);
+
+	MyDeque<String> newD4 = new MyDeque<String>();
+	//newD4.removeFirst();
+	//newD4.removeLast();
+	//newD4.getFirst();
+	//newD4.getLast();
 	
     }
 }
