@@ -1,20 +1,23 @@
 import java.util.*;
 public class FrontierQueue<T> implements Frontier<T> {
-    private ArrayDeque<T> frontierQueue;
-
-    public void add(T element) {
-	FrontierQueue.add(element);
+    MyQueue<T> fS;
+	
+    public FrontierQueue() {
+	fS = new MyQueue<T>();
     }
-
+	
+    public void add(T element) {
+	fS.enqueue(element);
+    }
+	
     public T next() {
-	if (frontierQueue.isEmpty()) {
+	if (fS.isEmpty()) {
 	    throw new NoSuchElementException();
 	}
-	return FrontierQueue.remove();
+	return fS.dequeue();
     }
-
+	
     public boolean hasNext() {
-	return !frontierQueue.size() == 0;
+	return (!fS.isEmpty());
     }
 }
-
