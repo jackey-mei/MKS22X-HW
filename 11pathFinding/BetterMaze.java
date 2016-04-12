@@ -147,11 +147,4 @@ public class BetterMaze{
 	    return ans + color(37,40) + "\n";
 	}
     } 
-    
-
-
-       
-    
-    
-
 }
