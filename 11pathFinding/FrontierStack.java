@@ -20,4 +20,15 @@ public class FrontierStack<T> implements Frontier<T> {
     public boolean hasNext() {
 	return !fS.isEmpty();
     }
+
+    public static void main(String[]args){
+	FrontierStack<Integer> t = new FrontierStack<Integer>();
+	t.add(5);
+	t.add(7);
+	System.out.println(t.next());
+	System.out.println(t.hasNext());
+	System.out.println(t.next());
+	System.out.println(t.hasNext());
+	//System.out.println(t.next());
+    }
 }

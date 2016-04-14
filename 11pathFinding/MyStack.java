@@ -62,5 +62,8 @@ public class MyStack<T> {
 	System.out.println(newS);
 	newS.pop();
 	System.out.println(newS);
+	newS.pop();
+	System.out.println(newS);
+	newS.pop();
     }
 }

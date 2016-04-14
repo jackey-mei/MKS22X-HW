@@ -73,11 +73,14 @@ public class MyLinkedList<T> implements Iterable<T> {
 	// sets the start to the second element
 	if (index == 0) {
 	    removed = start;
-	    start = current.getNext();
-	    start.setPrev(null);
 	    // sets end to null when removing only one item
 	    if (removed.getNext() == null) {
+		start = null;
 		end = null;
+	    }
+	    else {
+		start = current.getNext();
+		start.setPrev(null);
 	    }
 	}
 	// removes element at index and redirects
@@ -277,6 +280,19 @@ public class MyLinkedList<T> implements Iterable<T> {
 	for (String t: myLL) {
 	    System.out.println(t);
 	}
+
+	System.out.println();
+	System.out.println();
+	MyLinkedList<String> myLL3 = new MyLinkedList<String>();
+	myLL3.add("a");
+	myLL3.add("b");
+	myLL3.add("c");
+	myLL3.remove(2);
+	System.out.println(myLL3);
+	myLL3.remove(1);
+	System.out.println(myLL3);
+	myLL3.remove(0);
+	System.out.println(myLL3);
     }
 }
 

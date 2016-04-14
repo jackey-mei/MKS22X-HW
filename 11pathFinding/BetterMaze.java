@@ -31,6 +31,7 @@ public class BetterMaze {
 
 	public void setPrev(Node prev) {
 	    this.prev = prev;
+	}
     
 	public Coordinate getCoordinate() {
 	    return location;
@@ -42,50 +43,99 @@ public class BetterMaze {
     private int startRow, startCol;
     private Frontier<Node> placesToGo;
     private boolean animate;
+    private Node finalNode;
 
     public int[] solutionCoordinates() {
-        return solution;
+        Node count = finalNode;
+	int i = 1;
+	while (count.getPrev() != null) {
+	    count = count.getPrev();
+	    i ++;
+	}
+	int[] sol = new int[i * 2];
+	Node count2 = finalNode;
+        for (i = sol.length - 1; i > 0; i = i - 2) {
+	    sol[i] = count2.getCoordinate().getY();
+	    sol[i - 1] = count2.getCoordinate().getX();
+	    count2 = count2.getPrev();
+	}
+	solution = sol;
+	return sol;
     }
 
     public boolean solveBFS() {  
-        placesToGo = new FrontierQueue<T>();
+        placesToGo = new FrontierQueue<Node>();
 	return solve();
     }
 
     public boolean solveDFS() {  
-        placesToGo = new FrontierStack<T>();
+        placesToGo = new FrontierStack<Node>();
 	return solve();
     }
 
-    private boolean solve() {  
-        placesToGo.add(new Node(new Coordinate(startRow, startCol)));
-	while (placesToGo.hasNext()) {
-	    getNeightbors(placesToGo.next());
-	}
-    }
+    private boolean solve(){
+	placesToGo.add(new Node(new Coordinate(startRow, startCol)));
+	maze[startRow][startCol] = '.';
+	while(placesToGo.hasNext()){
+	    Node n = placesToGo.next();
+	    if (maze[n.getCoordinate().getX() + 1][n.getCoordinate().getY()] == ' ') {
+		placesToGo.add(new Node(new Coordinate(n.getCoordinate().getX() + 1, n.getCoordinate().getY()), n));
+		maze[n.getCoordinate().getX() + 1][n.getCoordinate().getY()] = '.';
+	    }
+	    if (maze[n.getCoordinate().getX() - 1][n.getCoordinate().getY()] == ' ') {
+		placesToGo.add(new Node(new Coordinate(n.getCoordinate().getX() - 1, n.getCoordinate().getY()), n));
+		maze[n.getCoordinate().getX() - 1][n.getCoordinate().getY()] = '.';
+	    }
+	    if (maze[n.getCoordinate().getX()][n.getCoordinate().getY() + 1] == ' ') {
+		placesToGo.add(new Node(new Coordinate(n.getCoordinate().getX(), n.getCoordinate().getY() + 1), n));
+		maze[n.getCoordinate().getX()][n.getCoordinate().getY() + 1] = '.';
+	    }
+	    if (maze[n.getCoordinate().getX()][n.getCoordinate().getY() - 1] == ' ') {
+		placesToGo.add(new Node(new Coordinate(n.getCoordinate().getX(), n.getCoordinate().getY() - 1), n));
+		maze[n.getCoordinate().getX()][n.getCoordinate().getY() - 1] = '.';
+	    }
 
-    public void getNeighbors(Node current) {
-	if (maze[current.getCoordinate().getX() + 1][current.getCoordinate().getY()] == ' ') {
-	    placesToGo.add(new Node(new Coordinate(x + 1, y), current));
+	    if (maze[n.getCoordinate().getX() + 1][n.getCoordinate().getY()] == 'E') {
+		finalNode = new Node(new Coordinate(n.getCoordinate().getX() + 1, n.getCoordinate().getY()), n);
+		maze[n.getCoordinate().getX() + 1][n.getCoordinate().getY()] = '.';
+		solutionCoordinates();
+		return true;
+	    }
+	    if (maze[n.getCoordinate().getX() - 1][n.getCoordinate().getY()] == 'E') {
+		finalNode = new Node(new Coordinate(n.getCoordinate().getX() - 1, n.getCoordinate().getY()), n);
+		maze[n.getCoordinate().getX() - 1][n.getCoordinate().getY()] = '.';
+		solutionCoordinates();
+		return true;
+	    }
+	    if (maze[n.getCoordinate().getX()][n.getCoordinate().getY() + 1] == 'E') {
+		finalNode = new Node(new Coordinate(n.getCoordinate().getX(), n.getCoordinate().getY() + 1), n);
+		maze[n.getCoordinate().getX()][n.getCoordinate().getY() + 1] = '.';
+		solutionCoordinates();
+		return true;
+	    }
+	    if (maze[n.getCoordinate().getX()][n.getCoordinate().getY() - 1] == 'E') {
+		finalNode = new Node(new Coordinate(n.getCoordinate().getX(), n.getCoordinate().getY() - 1), n);
+		maze[n.getCoordinate().getX()][n.getCoordinate().getY() - 1] = '.';
+		solutionCoordinates();
+		return true;
+	    }
+
+	    if (animate) {
+		System.out.println(this);
+		wait(100);
+	    }
 	}
-	if (maze[current.getCoordinate().getX() - 1][current.getCoordinate().getY()] != ' ') {
-	    placesToGo.add(new Node(new Coordinate(x + 1, y), current));
-	}
-	if (maze[current.getCoordinate().getX()][current.getCoordinate().getY() + 1] != ' ') {
-	    placesToGo.add(new Node(new Coordinate(x + 1, y), current));
-	}
-	if (maze[current.getCoordinate().getX()][current.getCoordinate().getY() - 1] != ' ') {
-	    placesToGo.add(new Node(new Coordinate(x + 1, y), current));
-	}
+	return false;
     }
 	
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b) {
-	/** IMPLEMENT THIS **/
+	animate = b;
     }    
 
 
     public BetterMaze(String filename) {
+	finalNode = null;
 	animate = false;
 	int maxc = 0;
 	int maxr = 0;
@@ -172,5 +222,18 @@ public class BetterMaze {
 	else {
 	    return ans + color(37, 40) + "\n";
 	}
-    } 
+    }
+    
+    public static void main(String[] args) {
+	BetterMaze someMaze = new BetterMaze("data3.dat");
+	someMaze.setAnimate(false);
+	System.out.println(someMaze.solveDFS());
+	int[] sol = someMaze.solutionCoordinates();
+	String s = "[";
+	for(int i = 0; i < sol.length; i++){
+	    s = s + sol[i] + ", ";
+	}
+	s = s.substring(0, s.length() - 2) + "]";
+        System.out.println(s);
+    }
 }

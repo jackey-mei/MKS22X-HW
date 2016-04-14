@@ -68,6 +68,14 @@ public class MyQueue<T> {
 	System.out.println(newQ.peek());
 	newQ.enqueue("koosta");
 	System.out.println(newQ);
+	newQ.dequeue();
+	System.out.println(newQ);
+	newQ.dequeue();
+	System.out.println(newQ);
+	newQ.dequeue();
+	System.out.println(newQ);
+	newQ.dequeue();
+	System.out.println(newQ);
     }
 
 }
