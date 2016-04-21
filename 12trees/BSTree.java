@@ -11,7 +11,13 @@ public class BSTree<T extends Comparable<T>> {
 	}
 
 	public int height() {
-	    return 0;
+	    if (getLeft() == null & getRight() == null) {
+		return 1;
+	    }
+	    else {
+		if (getLeft().height() + 1 > getRight().height() + 1) {
+		    return getLeft().height
+		
 	}
 	
 	public void add(T value) {
