@@ -10,25 +10,82 @@ public class BSTree<T extends Comparable<T>> {
 	    data = null;
 	}
 
+	public Node(T value) {
+	    this.left = null;
+	    this.right = null;
+	    data = value;
+	}
+
 	public int height() {
-	    if (getLeft() == null & getRight() == null) {
+	    if (getLeft() == null && getRight() == null) {
 		return 1;
 	    }
+	    else if (getLeft() == null) {
+		return getRight.height() + 1;
+	    }
+	    else if (getRight() == null) {
+		return getLeft().height() + 1;
+	    }
 	    else {
-		if (getLeft().height() + 1 > getRight().height() + 1) {
-		    return getLeft().height
+		return Math.max(getLeft().height(), getRight().height()) + 1;
+	    }
 		
 	}
 	
 	public void add(T value) {
+	    if (value < getData()) {
+		if (getLeft() == null) {
+		    setLeft(new Node(value));
+		}
+		else {
+		    getLeft().add(value);
+		}
+	    }
+	    else {
+		if (getRight() == null) {
+		    setRight(new Node(value));
+		}
+		else {
+		    getRight().add(value);
+		}
+	    }
 	}
 	
 	public String toString() {
-	    return "";
+	    String ans = getData() + " ";
+	    if (getLeft() != null) {
+		ans += getLeft().toString();
+	    }
+	    else {
+		ans += "_ ";
+	    }
+	    if (getRight() != null) {
+		ans += getRight().toString();
+	    }
+	    else {
+		ans + "_ ";
+	    }
+	    return ans;
+	    
 	}
 	
 	public boolean contains(T value) {
-	    return false;
+	    if (getLeft() != null) {
+		if (getData() != value) {
+		    return getLeft().contains(value);
+		}
+	        else {
+		    return true;
+		}
+	    }
+	    else if (getRight() != null) {
+		if (getData() != value) {
+		    return getRight().contains(value);
+		}
+		else {
+		    return true;
+		}
+	    }
 	}
 
 	public T getData() {
