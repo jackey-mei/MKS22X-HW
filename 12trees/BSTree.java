@@ -1,3 +1,4 @@
+import java.util.*;
 public class BSTree<T extends Comparable<T>> {
     private class Node {
 	T data;
@@ -21,7 +22,7 @@ public class BSTree<T extends Comparable<T>> {
 		return 1;
 	    }
 	    else if (getLeft() == null) {
-		return getRight.height() + 1;
+		return getRight().height() + 1;
 	    }
 	    else if (getRight() == null) {
 		return getLeft().height() + 1;
@@ -33,20 +34,25 @@ public class BSTree<T extends Comparable<T>> {
 	}
 	
 	public void add(T value) {
-	    if (value < getData()) {
-		if (getLeft() == null) {
-		    setLeft(new Node(value));
-		}
-		else {
-		    getLeft().add(value);
-		}
+	    if (data == null) {
+		data = value;
 	    }
 	    else {
-		if (getRight() == null) {
-		    setRight(new Node(value));
+		if (value.compareTo(data) < 0) {
+		    if (getLeft() == null) {
+			setLeft(new Node(value));
+		    }
+		    else {
+			getLeft().add(value);
+		    }
 		}
 		else {
-		    getRight().add(value);
+		    if (getRight() == null) {
+			setRight(new Node(value));
+		    }
+		    else {
+			getRight().add(value);
+		    }
 		}
 	    }
 	}
@@ -63,7 +69,7 @@ public class BSTree<T extends Comparable<T>> {
 		ans += getRight().toString();
 	    }
 	    else {
-		ans + "_ ";
+		ans += "_ ";
 	    }
 	    return ans;
 	    
@@ -86,6 +92,7 @@ public class BSTree<T extends Comparable<T>> {
 		    return true;
 		}
 	    }
+	    return false;
 	}
 
 	public T getData() {
@@ -104,11 +111,11 @@ public class BSTree<T extends Comparable<T>> {
 	    this.data = data;
 	}
     
-	public Node setLeft(Node left) {
+	public void setLeft(Node left) {
 	    this.left = left;
 	}
     
-	public Node setRight(Node right) {
+	public void setRight(Node right) {
 	    this.right = right;
 	}
     }
@@ -124,22 +131,49 @@ public class BSTree<T extends Comparable<T>> {
     }
 
     public int getHeight() {
-	if (root.getData() != null) {
+	if (root != null) {
 	    return root.height();
 	}
 	return -1;
     }
 
     public void add(T value) {
-	if (root.getData() != null) {
-	    
+	if (root != null) {
+	    root.add(value);
+	}
     }
     
     public String toString() {
+	if (root != null) {
+	    return root.toString();
+	}
 	return "";
     }
     
     public boolean contains(T value) {
+	if (root != null) {
+	    return root.contains(value);
+	}
 	return false;
+    }
+
+    public static void main(String[] args) {
+	BSTree<Integer> BSTree1 = new BSTree<Integer>();
+	BSTree1.add(7);
+	System.out.println(BSTree1);
+	BSTree1.add(6);
+	System.out.println(BSTree1);
+	BSTree1.add(5);
+	System.out.println(BSTree1);
+	BSTree1.add(4);
+	System.out.println(BSTree1);
+	BSTree1.add(3);
+	System.out.println(BSTree1);
+	BSTree1.add(2);
+	System.out.println(BSTree1);
+	BSTree1.add(1);
+	System.out.println(BSTree1);
+	System.out.println(BSTree1.contains(8));
+	System.out.println(BSTree1.getHeight());
     }
 }
