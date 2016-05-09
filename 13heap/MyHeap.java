@@ -1,7 +1,7 @@
 import java.util.*;
 @SuppressWarnings("unchecked")
 
-public class MyHeap<T extends Comparable<T>>{
+public class MyHeap<T extends Comparable<T>> {
     private T[] heap;
     private boolean isMaxHeap;
     private int size;
@@ -22,10 +22,10 @@ public class MyHeap<T extends Comparable<T>>{
 	isMaxHeap = true;
 	size = array.length;
 	heap = (T[])new Comparable[array.length + 1];
-	for (int i = 1; i <= size; i ++){
+	for (int i = 1; i <= size; i ++) {
 	    heap[i] = array[i - 1];
 	}
-	for (int i = size; i > 0; i --){
+	for (int i = size; i > 0; i --) {
 	    pushDown(i);
 	}
     }
@@ -50,8 +50,8 @@ public class MyHeap<T extends Comparable<T>>{
 	return temp;
     }
 
-    public void add(T value){
-	if (size + 1 == heap.length){
+    public void add(T value) {
+	if (size + 1 == heap.length) {
 	    doubleSize();
 	}
 	size ++;
@@ -59,9 +59,9 @@ public class MyHeap<T extends Comparable<T>>{
 	pushUp(size);
     }
 
-    private void doubleSize(){
+    private void doubleSize() {
 	T[] temp = (T[])new Comparable[size * 2 + 1];
-	for (int i = 1; i <= size; i ++){
+	for (int i = 1; i <= size; i ++) {
 	    temp[i] = heap[i];
 	}
 	heap = temp;
@@ -100,11 +100,11 @@ public class MyHeap<T extends Comparable<T>>{
 	}
     }
 
-    public T peek(){
+    public T peek() {
 	return heap[1];
     }
     
-    public boolean compare(T first, T second){
+    public boolean compare(T first, T second) {
 	if (isMaxHeap) {
 	    return first.compareTo(second) > 0;
 	}
