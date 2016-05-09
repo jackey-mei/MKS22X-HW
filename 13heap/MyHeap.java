@@ -43,6 +43,9 @@ public class MyHeap<T extends Comparable<T>> {
     }
     
     public T delete() {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
 	T temp = heap[1];
 	heap[1] = heap[size];
 	size --;
@@ -51,6 +54,7 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     public void add(T value) {
+	//if 
 	if (size + 1 == heap.length) {
 	    doubleSize();
 	}
@@ -101,6 +105,9 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     public T peek() {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
 	return heap[1];
     }
     
