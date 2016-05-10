@@ -25,7 +25,7 @@ public class MyHeap<T extends Comparable<T>> {
 	for (int i = 1; i <= size; i ++) {
 	    heap[i] = array[i - 1];
 	}
-	for (int i = size; i > 0; i --) {
+	for (int i = size / 2; i > 0; i --) {
 	    pushDown(i);
 	}
     }
@@ -37,7 +37,7 @@ public class MyHeap<T extends Comparable<T>> {
 	for (int i = 1; i <= size; i ++) {
 	    heap[i] = array[i - 1];
 	}
-	for (int i = size; i > 0; i --) {
+	for (int i = size / 2; i > 0; i --) {
 	    pushDown(i);
 	}
     }
@@ -54,7 +54,6 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     public void add(T value) {
-	//if 
 	if (size + 1 == heap.length) {
 	    doubleSize();
 	}
@@ -72,7 +71,7 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     private void pushUp(int index) {
-	if (index > 1 && compare(heap[index], heap[index / 2])) {
+	if (index > 1 && compareB(heap[index], heap[index / 2])) {
 	    T temp = heap[index / 2];
 	    heap[index / 2] = heap[index];
 	    heap[index] = temp;
@@ -81,26 +80,32 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     private void pushDown(int index) {
-	try {
-	    if (heap[index * 2 + 1] == null || compare(heap[index * 2], heap[index * 2 + 1])) {
-		T temp = heap[index * 2];
-		heap[index * 2] = heap[index];
-		heap[index] = temp;
-		if (index * 2 <= size) {
+	if (index * 2 + 1 <= size) {
+	    if (compareB(heap[index * 2], heap[index * 2 + 1])) {
+		if (compareB(heap[index], compareT(heap[index * 2], heap[index * 2 + 1]))) {
+		    T temp = heap[index * 2];
+		    heap[index * 2] = heap[index];
+		    heap[index] = temp;
 		    pushDown(index * 2);
 		}
 	    }
 	    else {
-		T temp = heap[index * 2 + 1];
-		heap[index * 2 + 1] = heap[index];
-		heap[index] = temp;
-		if (index * 2 + 1 <= size) {
+		if (compareB(heap[index], compareT(heap[index * 2], heap[index * 2 + 1]))) {
+		    T temp = heap[index * 2 + 1];
+		    heap[index * 2 + 1] = heap[index];
+		    heap[index] = temp;
 		    pushDown(index * 2 + 1);
 		}
 	    }
 	}
-	catch (IndexOutOfBoundsException e) {
-	    System.out.println("index is out of bounds");
+	else {
+	    if (index * 2 <= size) {
+		if (compareB(heap[index], heap[index * 2])) {
+		    T temp = heap[index * 2];
+		    heap[index * 2] = heap[index];
+		    heap[index] = temp;
+		}
+	    }
 	}
     }
 
@@ -111,7 +116,22 @@ public class MyHeap<T extends Comparable<T>> {
 	return heap[1];
     }
     
-    public boolean compare(T first, T second) {
+    public T compareT(T first, T second) {
+	if (isMaxHeap) {
+	    if (first.compareTo(second) > 0) {
+		return first;
+	    }
+	    return second;
+	}
+	else {
+	    if (second.compareTo(first) > 0) {
+		return second;
+	    }
+	    return first;
+	}
+    }
+
+    public boolean compareB(T first, T second) {
 	if (isMaxHeap) {
 	    return first.compareTo(second) > 0;
 	}
@@ -124,7 +144,25 @@ public class MyHeap<T extends Comparable<T>> {
 	    temp += heap[i] + " ";
 	}
 	return temp;
-	//return Arrays.toString(heap);
     }
+
+    public static void main(String[] args) {
+	MyHeap<Integer> newH = new MyHeap<Integer>();
+	newH.add(100);
+	newH.add(36);
+	newH.add(19);
+	newH.add(17);
+	newH.add(3);
+	newH.add(14);
+	newH.add(1);
+	newH.add(2);
+	newH.add(7);
+	System.out.println(newH);
+	System.out.println(newH.size);
+	newH.delete();
+	System.out.println(newH);
+
+    }
+
     
 }
