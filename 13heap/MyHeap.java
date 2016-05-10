@@ -82,7 +82,7 @@ public class MyHeap<T extends Comparable<T>> {
     private void pushDown(int index) {
 	if (index * 2 + 1 <= size) {
 	    if (compareB(heap[index * 2], heap[index * 2 + 1])) {
-		if (compareB(heap[index], compareT(heap[index * 2], heap[index * 2 + 1]))) {
+		if (compareB(compareT(heap[index * 2], heap[index * 2 + 1]), heap[index])) {
 		    T temp = heap[index * 2];
 		    heap[index * 2] = heap[index];
 		    heap[index] = temp;
@@ -90,7 +90,7 @@ public class MyHeap<T extends Comparable<T>> {
 		}
 	    }
 	    else {
-		if (compareB(heap[index], compareT(heap[index * 2], heap[index * 2 + 1]))) {
+		if (compareB(compareT(heap[index * 2], heap[index * 2 + 1]), heap[index])) {
 		    T temp = heap[index * 2 + 1];
 		    heap[index * 2 + 1] = heap[index];
 		    heap[index] = temp;
